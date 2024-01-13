@@ -1,0 +1,400 @@
+﻿<Window
+    x:Class="CENJE_Vison.Views.SettingPositiveWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:h="clr-namespace:HalconDotNet;assembly=halcondotnet"
+    xmlns:local="clr-namespace:CENJE_Vison.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="正极调试窗口"
+    Width="1200"
+    Height="800"
+    Closed="Window_Closed"
+    DataContext="{Binding Source={StaticResource Locator}, Path=SettingPVM}"
+    FontSize="22"
+    FontWeight="Bold"
+    mc:Ignorable="d">
+    <!--
+        后缀缩写：
+        ThresholdNegativeValue=_TN
+        ThresholdPositiveValue=_TP
+        ThresholdFinish=_TF
+        前缀缩写：
+        Black=B_
+        Sliver=S_
+        LightSliver=L_
+    -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <!--<Style TargetType="TextBlock" >
+             <Setter Property="Height" Value="40"/>
+         </Style>-->
+            <Style TargetType="TextBox">
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Width" Value="150" />
+                <Setter Property="BorderThickness" Value="3" />
+                <Setter Property="BorderBrush" Value="Black" />
+                <Setter Property="Margin" Value="4" />
+                <Setter Property="DataContext" Value="{Binding Source={StaticResource Locator}, Path=Main}" />
+            </Style>
+            <Style TargetType="Slider">
+                <Setter Property="Height" Value="20" />
+                <Setter Property="Margin" Value="1,1,1,10" />
+                <Setter Property="Maximum" Value="255" />
+                <Setter Property="IsSnapToTickEnabled" Value="True" />
+                <Setter Property="SmallChange" Value="1" />
+                <Setter Property="DataContext" Value="{Binding Source={StaticResource Locator}, Path=Main}" />
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="Height" Value="30" />
+            </Style>
+        </Grid.Resources>
+        <!--  第一行，放置halcon窗口，标签页，各个设置项目  -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <h:HSmartWindowControlWPF
+                x:Name="HwindowTest1"
+                Margin="10"
+                Background="Black"
+                HDoubleClickToFitContent="True"
+                HZoomContent="Off" />
+            <!--<Canvas x:Name="Canvas" Visibility="Collapsed" Grid.Column="1" Background="Transparent" MouseLeftButtonDown="Canvas_MouseLeftButtonDown" MouseUp="Canvas_MouseUp" MouseMove="Canvas_MouseMove"></Canvas>-->
+
+            <TabControl Grid.RowSpan="2" Grid.Column="1">
+                <!--  算法参数页面  -->
+                <TabItem Name="black" Header="算法参数">
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="算法参数（阈值）" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <!--  参数名  -->
+                            <StackPanel>
+                                <TextBlock Text="膜定位小值" />
+                                <TextBlock Text="定位针小值" />
+                                <TextBlock Text="花瓣基准小值" />
+                                <TextBlock Text="L2小值" />
+                                <TextBlock Text="下膜线小值" />
+                                <TextBlock Text="花瓣中心大值" />
+                                <TextBlock Text="铝舌小值" />
+                                <TextBlock Text="箔裂小值" />
+                                <TextBlock Text="定位模板分数" />
+                                <TextBlock Text="花瓣模板分数" />
+                                <TextBlock Text="" />
+                                <TextBlock
+                                    FontSize="23"
+                                    FontWeight="Bold"
+                                    Text="相机参数" />
+                                <TextBlock Text="增益" />
+                                <TextBlock Text="曝光时间" />
+                            </StackPanel>
+                            <!--  滑动条  -->
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Slider
+                                    x:Name="B_membraneLocation_TN"
+                                    Grid.Row="0"
+                                    Value="{Binding P_membraneDetectionModel_B.MembraneThreshold}" />
+                                <Slider
+                                    x:Name="B_footThreshold_TN"
+                                    Grid.Row="1"
+                                    Value="{Binding P_membraneDetectionModel_B.FootThreshold}" />
+                                <Slider
+                                    x:Name="B_flower_TN"
+                                    Grid.Row="2"
+                                    Value="{Binding P_membraneDetectionModel_B.FlowerThrehold}" />
+                                <Slider
+                                    x:Name="B_L2_TN"
+                                    Grid.Row="3"
+                                    Value="{Binding P_membraneDetectionModel_B.L2Threshold}" />
+                                <Slider
+                                    x:Name="B_membraneDown_TN"
+                                    Grid.Row="4"
+                                    Value="{Binding P_membraneDetectionModel_B.MembraneDownLineThrehold}" />
+                                <Slider
+                                    x:Name="B_flowerCenter_TN"
+                                    Grid.Row="5"
+                                    Value="{Binding P_membraneDetectionModel_B.FlowerCenterThrehold}" />
+                                <Slider
+                                    x:Name="B_tongue_TN"
+                                    Grid.Row="6"
+                                    Value="{Binding P_membraneDetectionModel_B.TongueThreshold}" />
+                                <Slider
+                                    x:Name="B_split_TN"
+                                    Grid.Row="7"
+                                    Value="{Binding P_membraneDetectionModel_B.SplitThreshold}" />
+                                <Slider
+                                    x:Name="B_locationScore_TN"
+                                    Grid.Row="8"
+                                    Value="{Binding P_membraneDetectionModel_B.LocationScore}" />
+                                <Slider
+                                    x:Name="B_flowerScore_TN"
+                                    Grid.Row="9"
+                                    Value="{Binding P_membraneDetectionModel_B.FlowerLocationScore}" />
+                                <Slider
+                                    x:Name="B_gain"
+                                    Grid.Row="12"
+                                    Value="{Binding P_membraneDetectionModel_B.Gain}" />
+                                <Slider
+                                    x:Name="B_exposureTime"
+                                    Grid.Row="13"
+                                    Value="{Binding P_membraneDetectionModel_B.ExposureTime}" />
+                            </Grid>
+                            <!--  数值显示  -->
+                            <StackPanel Grid.Column="2">
+                                <StackPanel.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="Height" Value="30" />
+                                    </Style>
+                                </StackPanel.Resources>
+                                <TextBlock Text="{Binding ElementName=B_membraneLocation_TN, Path=Value}" />
+                                <TextBlock Text="{Binding ElementName=B_footThreshold_TN, Path=Value}" />
+                                <TextBlock Text="{Binding ElementName=B_flower_TN, Path=Value}" />
+                                <TextBlock Text="{Binding ElementName=B_L2_TN, Path=Value}" />
+                                <TextBlock Text="{Binding ElementName=B_membraneDown_TN, Path=Value}" />
+                                <TextBlock Text="{Binding ElementName=B_flowerCenter_TN, Path=Value}" />
+                                <TextBlock Text="{Binding ElementName=B_tongue_TN, Path=Value}" />
+                                <TextBlock Text="{Binding ElementName=B_split_TN, Path=Value}" />
+                                <TextBlock Text="{Binding ElementName=B_locationScore_TN, Path=Value}" />
+                                <TextBlock Text="{Binding ElementName=B_flowerScore_TN, Path=Value}" />
+                                <TextBlock Text="" />
+                                <TextBlock Text="" />
+                                <TextBlock Text="{Binding ElementName=B_gain, Path=Value}" />
+                                <TextBlock Text="{Binding ElementName=B_exposureTime, Path=Value}" />
+                            </StackPanel>
+                            <!--  默认设定  -->
+                            <StackPanel Grid.Column="3">
+                                <StackPanel.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="Height" Value="30" />
+                                        <Setter Property="Foreground" Value="Green" />
+                                    </Style>
+                                </StackPanel.Resources>
+                                <TextBlock Text="1" />
+                                <TextBlock Text="1" />
+                                <TextBlock Text="1" />
+                                <TextBlock Text="1" />
+                                <TextBlock Text="1" />
+                                <TextBlock Text="1" />
+                                <TextBlock Text="1" />
+                                <TextBlock Text="1" />
+                                <TextBlock Text="1" />
+                                <TextBlock Text="1" />
+                                <TextBlock Text="" />
+                                <TextBlock Text="" />
+                                <TextBlock Text="1" />
+                                <TextBlock Text="1" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <!--  标定参数设置页面  -->
+                <TabItem Name="calibrate" Header="标定参数">
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Margin" Value="1" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Text="运行标定参数" />
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Text="标定值X" />
+                            <TextBlock Grid.Row="1" Text="标定值Y" />
+                            <TextBlock Grid.Row="2" Text="校准标定参数" />
+                            <TextBlock Grid.Row="3" Text="校准值X" />
+                            <TextBlock Grid.Row="4" Text="校准值Y" />
+                            <TextBox
+                                x:Name="calibrateX_P"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="{Binding P_cameraAndCalibrationModel.CalibrationX}" />
+                            <TextBox
+                                x:Name="calibrateY_P"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding P_cameraAndCalibrationModel.CalibrationY}" />
+                            <TextBox
+                                x:Name="calibrationX_P"
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Text="{Binding P_cameraAndCalibrationModel.AdjustX}" />
+                            <TextBox
+                                x:Name="calibrationY_P"
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Text="{Binding P_cameraAndCalibrationModel.AdjustY}" />
+                        </Grid>
+                        <Button x:Name="btn_saveCalibrate_P">保存标定参数</Button>
+                        <TextBlock Text="RIO设置" />
+                        <Button x:Name="btn_pictureROI_P" Click="btn_pictureROI_P_Click">图像有效区域ROI</Button>
+                        <Button x:Name="btn_pinROI_P" Click="btn_pinROI_P_Click">针ROI</Button>
+                        <Button x:Name="btn_flowerROI_P" Click="btn_flowerROI_P_Click">花瓣对角ROI</Button>
+                        <Button x:Name="btn_aluminiumTongueROI_P" Click="btn_aluminiumTongueROI_P_Click">铝舌区域ROI</Button>
+                        <TextBlock Text="铝舌下位移检测位" />
+                        <TextBlock />
+                        <CheckBox
+                            x:Name="IfUsed_P"
+                            Content="是否使用标定模式"
+                            IsChecked="{Binding P_cameraAndCalibrationModel.CalibrationMod}" />
+                    </StackPanel>
+                </TabItem>
+                <!--  相机参数设置页面  -->
+                <TabItem Name="camera" Header="相机参数">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Height" Value="40" />
+                            </Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Height" Value="30" />
+                                <Setter Property="Width" Value="150" />
+                                <Setter Property="BorderThickness" Value="3" />
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter Property="Margin" Value="4" />
+                            </Style>
+                            <Style TargetType="Slider">
+                                <Setter Property="Height" Value="20" />
+                                <Setter Property="Margin" Value="1,10,1,15" />
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1.5*" />
+                        </Grid.ColumnDefinitions>
+                        <!--  第一列，参数名称  -->
+                        <StackPanel>
+                            <!--  参数名称  -->
+                            <TextBlock Text="图像高" />
+                            <TextBlock Text="图像宽" />
+                            <TextBlock Text="OffsetX" />
+                            <TextBlock Text="OffsetY" />
+                            <TextBlock Text="FPS" />
+                            <TextBlock Text="旋转角度" />
+                            <TextBlock Text="碗光源亮度" />
+                            <TextBlock Text="同轴光源亮度" />
+                            <TextBlock Text="光源持续时间" />
+                            <TextBlock Text="光源提前时间" />
+                        </StackPanel>
+                        <!--  第二列参数设置  -->
+                        <StackPanel Grid.Column="1">
+                            <TextBox x:Name="imageHeight_P" Text="{Binding P_cameraAndCalibrationModel.ImageHeight}" />
+                            <TextBox x:Name="imageWidth_P" Text="{Binding P_cameraAndCalibrationModel.ImageWidth}" />
+                            <TextBox x:Name="offestX_P" Text="{Binding P_cameraAndCalibrationModel.OffsetX}" />
+                            <TextBox x:Name="offestY_P" Text="{Binding P_cameraAndCalibrationModel.OffsetY}" />
+                            <TextBox x:Name="FPS_P" Text="{Binding P_cameraAndCalibrationModel.FPS}" />
+                            <TextBox x:Name="rotationAngle_P" Text="{Binding P_cameraAndCalibrationModel.Angel}" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <Slider x:Name="light1_P" Value="{Binding P_cameraAndCalibrationModel.Light1}" />
+                                    <Slider x:Name="light2_P" Value="{Binding P_cameraAndCalibrationModel.Light2}" />
+                                    <TextBox
+                                        x:Name="lightDuration_P"
+                                        Margin="20,0,0,10"
+                                        Text="{Binding P_cameraAndCalibrationModel.LightTime}" />
+                                    <TextBox
+                                        x:Name="lightLeadTime_P"
+                                        Margin="20,0,0,10"
+                                        Text="{Binding P_cameraAndCalibrationModel.LightTimeAdvance}" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{Binding ElementName=light1, Path=Value}" />
+                                    <TextBlock Text="{Binding ElementName=light2, Path=Value}" />
+                                    <TextBlock Text="ms" />
+                                    <TextBlock Text="us" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <!--  第二行，显示设置项相关信息  -->
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="" />
+        </StackPanel>
+        <!--  第三行，按键  -->
+        <StackPanel
+            Grid.Row="2"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Width" Value="120" />
+                    <Setter Property="Height" Value="80" />
+                    <Setter Property="Margin" Value="3,0,3,0" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                    <ContentControl
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Content="{TemplateBinding Content}"
+                                        Foreground="Black" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </StackPanel.Resources>
+            <Button>运行</Button>
+            <Button>停止</Button>
+            <Button Command="{Binding ReadOK_Command}">良品</Button>
+            <Button Command="{Binding ReadNG_Command}">次品</Button>
+            <Button>改参数</Button>
+            <Button>花瓣模板</Button>
+            <Button>定位模板</Button>
+        </StackPanel>
+    </Grid>
+</Window>

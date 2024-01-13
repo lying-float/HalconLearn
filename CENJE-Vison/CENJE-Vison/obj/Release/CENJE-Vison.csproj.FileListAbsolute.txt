@@ -1,0 +1,19 @@
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\MainWindow.g.cs
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\App.g.cs
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\CENJE-Vison_MarkupCompile.cache
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\CENJE-Vison_MarkupCompile.lref
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\bin\Release\CENJE-Vison.exe.config
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\bin\Release\CENJE-Vison.exe
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\bin\Release\CENJE-Vison.pdb
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\bin\Release\halcondotnet.dll
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\bin\Release\halcondotnet.xml
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\MainWindow.baml
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\CENJE-Vison.g.resources
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\CENJE_Vison.Properties.Resources.resources
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\CENJE-Vison.csproj.GenerateResource.cache
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\CENJE-Vison.csproj.CoreCompileInputs.cache
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\CENJE-Vison.csproj.CopyComplete
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\CENJE-Vison.exe
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\CENJE-Vison.pdb
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\CENJE-Vison.csproj.AssemblyReference.cache
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Release\CENJE.Data_Interface\Vector LOGO for WPF（OK）.baml

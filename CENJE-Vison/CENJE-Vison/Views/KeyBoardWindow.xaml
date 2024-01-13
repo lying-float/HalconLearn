@@ -1,0 +1,59 @@
+﻿<Window x:Class="CENJE_Vison.Views.KeyBoardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CENJE_Vison.Views"
+        xmlns:locals="clr-namespace:CENJE_Vison.Views.Controls"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        WindowStartupLocation="Manual"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Title="KeyBoard" Height="190" Width="540" MouseLeftButtonDown="MainWindow_OnMouseLeftButtonDown" ShowInTaskbar="True">
+    <Window.Resources>
+        <SolidColorBrush x:Key="ColorBrush" Color="Red" Opacity="0.7"></SolidColorBrush>
+        <PathGeometry x:Key="closed" Figures="M509.125332 997.359791C236.342166 997.359791 14.419101 775.403955 14.419101 502.620789 14.419101 229.804853 236.342166 7.849017 509.125332 7.849017s494.739002 221.955836 494.739002 494.771772c0 272.783166-221.955836 494.739002-494.739002 494.739002zM726.85375 321.923243l-36.998101-36.965331-180.697547 180.664776-180.697546-180.664776-36.998101 36.965331 180.697546 180.697546-180.697546 180.664776 36.998101 36.998101 180.697546-180.697546 180.697547 180.697546 36.998101-36.998101-180.697546-180.664776 180.697546-180.697546z"></PathGeometry>
+        <Style x:Key="CloseBtn" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{StaticResource ColorBrush}"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Part_Border"  BorderThickness="{TemplateBinding BorderThickness}">
+
+
+                            <Grid>
+                                <Ellipse Width="Auto" Height="Auto" Stroke="LightGray">
+                                    <Ellipse.Fill>
+                                        <SolidColorBrush Color="Red" Opacity="0.5"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock Text="×" HorizontalAlignment="Center" Foreground="LightGray"  VerticalAlignment="Center" FontSize="20" />
+                            </Grid>
+
+
+
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter  Property="Background" Value="Red"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter  Property="Background" Value="Red"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Viewbox Margin="0,0,6,0">
+            <!--<locals:KeyBoard></locals:KeyBoard>-->
+        </Viewbox>
+        <Button Width="21" Height="21" Style="{StaticResource CloseBtn}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="519,0,0,0" Click="ButtonBase_OnClick"></Button>
+    </Grid>
+</Window>

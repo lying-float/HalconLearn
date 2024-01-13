@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<System_Root>
+  <FormulaType>Fromula5</FormulaType>
+  <FlowerCount>3</FlowerCount>
+  <Warming>0</Warming>
+  <AreaMaxN>150</AreaMaxN>
+  <AreaMinN>50</AreaMinN>
+  <FoilCrackMaxN>10</FoilCrackMaxN>
+  <FoilCrackMinN>0</FoilCrackMinN>
+  <AngleMaxN>95</AngleMaxN>
+  <AngleMinN>85</AngleMinN>
+  <L2MaxN>5.5</L2MaxN>
+  <L2MinN>1</L2MinN>
+  <RivetOffsrtMaxN>5</RivetOffsrtMaxN>
+  <RivetOffsrtMinN>0</RivetOffsrtMinN>
+  <ColorN>1</ColorN>
+  <AreaMaxP>150</AreaMaxP>
+  <AreaMinP>50</AreaMinP>
+  <FoilCrackMaxP>10</FoilCrackMaxP>
+  <FoilCrackMinP>0</FoilCrackMinP>
+  <AngleMaxP>95</AngleMaxP>
+  <AngleMinP>85</AngleMinP>
+  <L2MaxP>5.5</L2MaxP>
+  <L2MinP>1</L2MinP>
+  <RivetOffsrtMaxP>5</RivetOffsrtMaxP>
+  <RivetOffsrtMinP>0</RivetOffsrtMinP>
+  <HeightMax>29</HeightMax>
+  <HeightMin>26</HeightMin>
+  <ODMax>25</ODMax>
+  <ODMin>10</ODMin>
+  <PinPitchMax>15.5</PinPitchMax>
+  <PinPitchMin>0</PinPitchMin>
+  <DifferenceOfHeightMax>3.5</DifferenceOfHeightMax>
+  <DifferenceOfHeightMin>0</DifferenceOfHeightMin>
+  <CPlineUpMax>0</CPlineUpMax>
+  <CPlineUpMin>0</CPlineUpMin>
+  <CPlineBottomMax>0</CPlineBottomMax>
+  <CPlineBottomMin>0</CPlineBottomMin>
+</System_Root>

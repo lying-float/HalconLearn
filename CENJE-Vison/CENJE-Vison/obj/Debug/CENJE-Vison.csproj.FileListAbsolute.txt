@@ -1,0 +1,144 @@
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csproj.AssemblyReference.cache
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\MainWindow.g.cs
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\App.g.cs
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison_MarkupCompile.cache
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison_MarkupCompile.lref
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\bin\Debug\CENJE-Vison.exe.config
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\bin\Debug\CENJE-Vison.exe
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\bin\Debug\CENJE-Vison.pdb
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\bin\Debug\halcondotnet.dll
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\bin\Debug\halcondotnet.xml
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE.Data_Interface\Vector LOGO for WPF（OK）.baml
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\MainWindow.baml
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.g.resources
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE_Vison.Properties.Resources.resources
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csproj.GenerateResource.cache
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csproj.CoreCompileInputs.cache
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csproj.CopyComplete
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.exe
+D:\vs2019 C#\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.pdb
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\CENJE-Vison.exe.config
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\CENJE-Vison.exe
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\CENJE-Vison.pdb
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE.Data_Interface\Vector LOGO for WPF（OK）.baml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\App.g.cs
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison_MarkupCompile.cache
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison_MarkupCompile.lref
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.g.resources
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE_Vison.Properties.Resources.resources
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csproj.GenerateResource.cache
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csproj.CoreCompileInputs.cache
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csproj.CopyComplete
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.exe
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.pdb
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.dll
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.pdb
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.xml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\App.baml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\FormulaWindow.g.cs
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison_Content.g.cs
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\FormulaWindow.baml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\KeyBoardWindow.g.cs
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\KeyBoardWindow.baml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\MainWindow.g.cs
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\MainWindow.baml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\LoginWindow.g.cs
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\LoginWindow.baml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\Controls\PassWordTextBox.g.cs
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\Controls\PassWordTextBox.baml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\SettingNegativeWindow.g.cs
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\SettingNegativeWindow.baml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csprojAssemblyReference.cache
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\WXB\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\CENJE-Vison.exe.config
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\CENJE-Vison.exe
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\CENJE-Vison.pdb
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\halcondotnet.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.pdb
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\halcondotnet.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csproj.AssemblyReference.cache
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE.Data_Interface\Vector LOGO for WPF（OK）.baml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\Controls\PassWordTextBox.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\LoginWindow.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\MainWindow.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\FormulaWindow.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\KeyBoardWindow.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\SettingNegativeWindow.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\App.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison_Content.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison_MarkupCompile.cache
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison_MarkupCompile.lref
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\Controls\PassWordTextBox.baml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\LoginWindow.baml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\MainWindow.baml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\FormulaWindow.baml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\KeyBoardWindow.baml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\SettingNegativeWindow.baml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.g.resources
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE_Vison.Properties.Resources.resources
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csproj.GenerateResource.cache
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csproj.CoreCompileInputs.cache
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.csproj.CopyComplete
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.exe
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\CENJE-Vison.pdb
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\CsvHelper.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Bcl.HashCode.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Buffers.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Memory.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\CsvHelper.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\Microsoft.Bcl.HashCode.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Buffers.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Memory.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\SettingFinishWindow.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\SettingPositiveWindow.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\SettingFinishWindow.baml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\SettingPositiveWindow.baml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\StartWindow.g.cs
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\Views\StartWindow.baml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\log4net.config
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\log4net.dll
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\bin\Debug\log4net.xml
+C:\Users\W\Desktop\CENJE-Vison\CENJE-Vison\obj\Debug\App.baml

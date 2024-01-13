@@ -1,0 +1,271 @@
+﻿<Window
+    x:Class="CENJE_Vison.Views.FormulaWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:F_modle="clr-namespace:CENJE_Vison.Models"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CENJE_Vison.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="FormulaWindow"
+    Width="1200"
+    Height="760"
+    DataContext="{Binding Source={StaticResource Locator}, Path=FormulaVM}"
+    FontSize="22"
+    FontWeight="Bold"
+    mc:Ignorable="d">
+    <!--<i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <c:EventCommand Command="{Binding Load_Command}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>-->
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Closed">
+            <b:InvokeCommandAction Command="{Binding Closed_Command}"/>
+        </b:EventTrigger>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding Load_Command}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="FirstColumn" Width="*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  物料型号选择  -->
+        <StackPanel>
+            <TextBlock
+                Background="BurlyWood"
+                FontSize="30"
+                Text="物料型号" />
+            <!--<StackPanel>
+                <StackPanel.Resources>
+                    <Style  TargetType="{x:Type Button}">
+                        <Setter Property="Padding" Value="1,1,1,0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="layout" BorderBrush="Gray" BorderThickness="1,1,1,0" Margin="1">
+                                        <Rectangle>
+                                            <Rectangle.Fill>
+                                                <VisualBrush>
+                                                    <VisualBrush.Visual>
+                                                        <Path x:Name="btnPath"
+                                                        Data="M0 0L10 10M0 10L10 0" Stroke="Gray"
+                                                        StrokeThickness="1"/>
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="btnPath" Property="Stroke" Value="Red"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                    </Style>
+                </StackPanel.Resources>
+            </StackPanel>-->
+            <ListBox
+                x:Name="formulaList"
+                Width="250"
+                HorizontalAlignment="Center">
+                <ListBox.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Width" Value="200" />
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="Background" Value="AliceBlue" />
+                        <Setter Property="BorderThickness" Value="0" />
+                    </Style>
+                </ListBox.Resources>
+            </ListBox>
+        </StackPanel>
+
+        <!--  更改并保存配方设置  -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--  第一行  -->
+            <StackPanel
+                Margin="2"
+                VerticalAlignment="Center"
+                DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+                Orientation="Horizontal">
+                <TextBlock Text=" 当前物料型号：" />
+                <TextBox
+                    x:Name="textBoxType"
+                    Width="150"
+                    Text="{Binding FM.FormulaType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                <TextBlock Text="  花瓣数量：" />
+                <TextBox Width="100" Text="{Binding FM.FlowerCount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                <TextBlock Text=" 朵 " />
+                <TextBlock Text="  良率报警：" />
+                <TextBox Width="100" Text="{Binding FM.Warming, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                <TextBlock Text=" % " />
+            </StackPanel>
+            <!--  正极检测参数  -->
+            <StackPanel Grid.Row="1" DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+                <TextBlock />
+                <TextBlock Text=" 正极检测参数：" />
+                <UniformGrid Columns="10">
+                    <TextBlock Text=" 花瓣面积：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.AreaMinP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.AreaMaxP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text=" 裂箔：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.FoilCrackMinP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.FoilCrackMaxP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                </UniformGrid>
+                <UniformGrid Columns="10">
+                    <TextBlock Text=" 角度：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.AngleMinP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.AngleMaxP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text=" L2距离：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.L2MinP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.L2MaxP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                </UniformGrid>
+                <UniformGrid Columns="10">
+                    <TextBlock Text=" 铆偏：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.RivetOffsrtMinP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.RivetOffsrtMaxP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                </UniformGrid>
+
+            </StackPanel>
+            <!--  负极检测参数  -->
+            <StackPanel Grid.Row="2" DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+                <TextBlock />
+                <TextBlock Text=" 负极检测参数：" />
+                <UniformGrid Columns="10">
+                    <TextBlock Text=" 花瓣面积：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.AreaMinN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.AreaMaxN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text=" 裂箔：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.FoilCrackMinN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.FoilCrackMaxN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                </UniformGrid>
+                <UniformGrid Columns="10">
+                    <TextBlock Text=" 角度：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.AngleMinN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.AngleMaxN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text=" L2距离：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.L2MinN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.L2MaxN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                </UniformGrid>
+                <UniformGrid Columns="10">
+                    <TextBlock Text=" 铆偏：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.RivetOffsrtMinN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.RivetOffsrtMaxN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                </UniformGrid>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="负极膜色：" />
+                    <TextBox Width="100" Text="{Binding FM.ColorN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="（1:小银，2：亮银，3：黑色）" />
+                </StackPanel>
+            </StackPanel>
+            <!--  芯包检测参数  -->
+            <StackPanel Grid.Row="3" DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+                <TextBlock />
+                <TextBlock Text=" 芯包检测参数：" />
+                <UniformGrid Columns="10">
+                    <TextBlock Text=" 芯包高度：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.HeightMin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.HeightMax, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text=" 芯包外径：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.ODMin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.ODMax, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                </UniformGrid>
+                <UniformGrid Columns="10">
+                    <TextBlock Text=" 脚距：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.PinPitchMin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.PinPitchMax, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text=" 高低脚：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.DifferenceOfHeightMin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.DifferenceOfHeightMax, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                </UniformGrid>
+                <UniformGrid Columns="10">
+                    <TextBlock Text=" 上CP线：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.CPlineUpMin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.CPlineUpMax, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text=" 下CP线：" />
+                    <TextBlock Text="  Min" />
+                    <TextBox Text="{Binding FM.CPlineBottomMin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <TextBlock Text="  Max" />
+                    <TextBox Text="{Binding FM.CPlineBottomMax, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                </UniformGrid>
+
+            </StackPanel>
+            <!--  操作按钮  -->
+            <StackPanel
+                Grid.Row="4"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
+                <Button
+                    x:Name="Btn_CreateFormula"
+                    Width="150"
+                    Height="50"
+                    Command="{Binding Create_Command}"
+                    Content="新建" />
+                <Button
+                    x:Name="Btn_DeleteFormula"
+                    Width="150"
+                    Height="50"
+                    Command="{Binding Delete_Command}"
+                    Content="删除" />
+                <Button
+                    x:Name="Btn_SelectFormula"
+                    Width="150"
+                    Height="50"
+                    Command="{Binding Select_Comand}"
+                    Content="选择" />
+                <Button
+                    x:Name="Btn_SaveFormula"
+                    Width="150"
+                    Height="50"
+                    Command="{Binding Save_Command}"
+                    CommandParameter="{Binding ElementName=textBoxType, Path=Text}"
+                    Content="保存" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

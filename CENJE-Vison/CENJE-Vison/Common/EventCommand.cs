@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows;
+using System.Windows.Interactivity;
+
+namespace CENJE_Vison.Common
+{
+    public class EventCommand:TriggerAction<DependencyObject>
+    {
+        protected override void Invoke(object parameter)
+        {
+            if(CommandParameter != null)
+            {
+                parameter = CommandParameter;
+            }
+            if (Command != null)
+            {
+                Command.Execute(parameter);
+            }
+        }
+        /// <summary>
+        /// 事件
+        /// </summary>
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
+        public static readonly DependencyProperty CommandProperty =
+                DependencyProperty.Register("Command", typeof(ICommand), typeof(EventCommand), new PropertyMetadata(null));
+
+
+        /// <summary>
+        /// 事件参数，若为空，则将自动传入事件的真实参数
+        /// </summary>
+        public object CommandParameter
+        {
+            get { return (object)GetValue(CommandParameterProperty); }
+            set { SetValue(CommandParameterProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CommandParameter.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CommandParameterProperty =
+            DependencyProperty.Register("CommandParameter", typeof(object), typeof(object), new PropertyMetadata(0));
+
+    }
+
+}

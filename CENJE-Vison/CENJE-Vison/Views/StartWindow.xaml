@@ -1,0 +1,43 @@
+﻿<Window
+    x:Class="CENJE_Vison.Views.StartWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CENJE_Vison.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="StartWindow"
+    Width="800"
+    Height="450"
+    
+    mc:Ignorable="d">
+    <Grid Background="#7DF9FF">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            x:Name="NameText"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="50"
+            Text="{Binding NameText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <TextBlock
+            Name="LogText"
+            Grid.Row="1"
+            Height="50"
+            HorizontalAlignment="Center"
+            Text="{Binding LogText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <ProgressBar
+            Grid.Row="2"
+            Height="3"
+            IsIndeterminate="True" />
+        <TextBlock
+            Name="ProcessValueText"
+            Grid.Row="3"
+            Height="50"
+            HorizontalAlignment="Center"
+            Text="{Binding ProcessValueText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+    </Grid>
+</Window>

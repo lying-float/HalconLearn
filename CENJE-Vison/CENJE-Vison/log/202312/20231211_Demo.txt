@@ -1,0 +1,36 @@
+﻿
+ 
+Datetime：2023-12-11 02:20:59,803 
+HostName:WXB 
+ThreadID:[1] 
+LogLevel：  INFO  
+ClassName：Info property: [(null)] - 
+Description：test
+ 
+
+ 
+Datetime：2023-12-11 02:21:02,827 
+HostName:WXB 
+ThreadID:[1] 
+LogLevel：  INFO  
+ClassName：Info property: [(null)] - 
+Description：test
+ 
+
+ 
+Datetime：2023-12-11 02:21:03,459 
+HostName:WXB 
+ThreadID:[1] 
+LogLevel：  INFO  
+ClassName：Info property: [(null)] - 
+Description：test
+ 
+
+ 
+Datetime：2023-12-11 02:21:06,942 
+HostName:WXB 
+ThreadID:[1] 
+LogLevel：  INFO  
+ClassName：Info property: [(null)] - 
+Description：test
+ 

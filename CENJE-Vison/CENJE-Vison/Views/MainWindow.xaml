@@ -1,0 +1,1946 @@
+﻿<Window
+    x:Class="CENJE_Vison.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:convert="clr-namespace:CENJE_Vison.Views.Convert"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:h="clr-namespace:HalconDotNet;assembly=halcondotnet"
+    xmlns:local="clr-namespace:CENJE_Vison.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="CCD钉卷机视觉检测系统"
+    Width="1366"
+    Height="768"
+    Background="#6D819A"
+    DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+    FontFamily="SimSun"
+    ResizeMode="CanResizeWithGrip"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    mc:Ignorable="d">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding Load_Command}" />
+        </b:EventTrigger>
+        <b:EventTrigger EventName="Closed">
+            <b:InvokeCommandAction Command="{Binding Closed_Command}" />
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <FrameworkElement.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ItemName" TargetType="{x:Type TextBlock}">
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="SimSun" />
+                <Setter Property="Margin" Value="6,6,0,6" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="BorderBrush" Value="green" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                            <Border
+                                x:Name="border"
+                                Margin="1"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                                <Grid>
+                                    <ScrollViewer
+                                        x:Name="PART_ContentHost"
+                                        Margin="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Focusable="False"
+                                        HorizontalScrollBarVisibility="Disabled"
+                                        VerticalScrollBarVisibility="Disabled" />
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </FrameworkElement.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <convert:ItemBoolConvert x:Key="ItemBoolConvert" />
+            <Style TargetType="MenuItem">
+                <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="MenuItem">
+                            <Border
+                                x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition x:Name="ColIcon" Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition x:Name="ColNext" Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border BorderBrush="#22ffff" BorderThickness="0,0,1,0">
+                                        <Grid
+                                            x:Name="GlyphPanel"
+                                            Grid.Column="0"
+                                            VerticalAlignment="Center"
+                                            Visibility="Hidden">
+                                            <Path Data="F1 M 10.0,1.2 L 4.7,9.1 L 4.5,9.1 L 0,5.2 L 1.3,3.5 L 4.3,6.1L 8.3,0 L 10.0,1.2 Z" Fill="#00aaff" />
+                                        </Grid>
+                                    </Border>
+                                    <ContentPresenter
+                                        x:Name="HeaderHost"
+                                        Grid.Column="1"
+                                        Margin="8,0"
+                                        VerticalAlignment="Center"
+                                        ContentSource="Header" />
+                                    <Grid
+                                        x:Name="ArrowPanel"
+                                        Grid.Column="2"
+                                        Margin="5,0"
+                                        VerticalAlignment="Center">
+                                        <Path
+                                            x:Name="ArrowPanelPath"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"
+                                            Data="M0,0 L0,8 L4,4 z"
+                                            Fill="{TemplateBinding Foreground}" />
+                                    </Grid>
+                                    <Popup
+                                        x:Name="SubMenuPopup"
+                                        Focusable="false"
+                                        IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                        Placement="Right">
+                                        <Border
+                                            x:Name="SubMenuBorder"
+                                            Padding="2,2,2,2"
+                                            BorderBrush="#FFFFFF"
+                                            BorderThickness="1">
+                                            <Grid x:Name="SubMenu">
+                                                <StackPanel
+                                                    Background="#ffffff"
+                                                    IsItemsHost="True"
+                                                    KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                            </Grid>
+                                        </Border>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="Role" Value="TopLevelHeader">
+                                    <Setter Property="Padding" Value="6,1" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter TargetName="SubMenuPopup" Property="Placement" Value="Bottom" />
+                                    <Setter TargetName="ColIcon" Property="MinWidth" Value="0" />
+                                    <Setter TargetName="ColNext" Property="Width" Value="Auto" />
+                                    <Setter TargetName="GlyphPanel" Property="Visibility" Value="Collapsed" />
+                                    <Setter TargetName="ArrowPanel" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                                <Trigger Property="IsHighlighted" Value="True">
+                                    <Setter Property="Background" Value="#ffaa00" />
+                                </Trigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsHighlighted" Value="True" />
+                                        <Condition Property="Role" Value="TopLevelHeader" />
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter TargetName="Border" Property="Background" Value="Green" />
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+
+                                <Trigger Property="Role" Value="TopLevelItem">
+                                    <Setter Property="Padding" Value="6,1" />
+                                    <Setter TargetName="ArrowPanel" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                                <Trigger Property="Role" Value="SubmenuHeader">
+                                    <Setter Property="Padding" Value="5,2" />
+                                </Trigger>
+                                <Trigger Property="Role" Value="SubmenuItem">
+                                    <Setter Property="Padding" Value="5,2" />
+                                    <Setter TargetName="ArrowPanel" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter TargetName="GlyphPanel" Property="Visibility" Value="Visible" />
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="LightGray" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+
+        <Menu
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Background="#FFF0F8FF"
+            FontFamily="SimSun"
+            FontSize="16">
+            <MenuItem Name="monu" Header="执行">
+                <MenuItem
+                    Name="runAll"
+                    Command="{Binding MenuItem_Command}"
+                    Header="运行全部检测"
+                    IsCheckable="True"
+                    IsChecked="{Binding MainViewSection.isOpenAllChecked, Mode=TwoWay}" />
+                <MenuItem
+                    Name="stopAll"
+                    Command="{Binding MenuItem_Command}"
+                    Header="停止全部检测"
+                    IsCheckable="True"
+                    IsChecked="{Binding MainViewSection.isOpenAllChecked, Mode=TwoWay, Converter={StaticResource ItemBoolConvert}}" />
+                <Separator />
+                <MenuItem
+                    Name="runLocation1"
+                    Header="运行负极花瓣检测"
+                    IsCheckable="{Binding MainViewSection.isOpenAllChecked}"
+                    IsChecked="{Binding MainViewSection.IsOpenNegativeChecked, Mode=TwoWay}" />
+                <MenuItem
+                    Name="runLocation2"
+                    Header="运行正极花瓣检测"
+                    IsCheckable="{Binding MainViewSection.isOpenAllChecked}"
+                    IsChecked="{Binding MainViewSection.IsOpenPositiveChecked, Mode=TwoWay}" />
+
+                <MenuItem
+                    Name="runLocation3"
+                    Header="运行成品检测"
+                    IsCheckable="{Binding MainViewSection.isOpenAllChecked}"
+                    IsChecked="{Binding MainViewSection.IsOpenFinishChecked, Mode=TwoWay}" />
+                <Separator />
+                <Separator />
+                <MenuItem
+                    Name="projectSet"
+                    Command="{Binding Formula_Command}"
+                    Header="配方列表" />
+                <Separator />
+            </MenuItem>
+            <MenuItem Name="debug" Header="调试">
+                <MenuItem
+                    Name="debugLocation1"
+                    Command="{Binding SettingUp_Command}"
+                    CommandParameter="{Binding ElementName=debugLocation1, Path=Name}"
+                    Header="负极花瓣检测" />
+                <MenuItem
+                    Name="debugLocation2"
+                    Command="{Binding SettingUp_Command}"
+                    CommandParameter="{Binding ElementName=debugLocation2, Path=Name}"
+                    Header="正极花瓣检测" />
+                <MenuItem
+                    Name="debugLocation3"
+                    Command="{Binding SettingUp_Command}"
+                    CommandParameter="{Binding ElementName=debugLocation3, Path=Name}"
+                    Header="成品检测" />
+            </MenuItem>
+            <MenuItem Name="record" Header="记录">
+                <MenuItem Name="ok" Header="OK">
+                    <MenuItem
+                        Name="okLocation1"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=okLocation1, Path=Name}"
+                        Header="负极花瓣检测" />
+                    <MenuItem
+                        Name="okLocation2"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=okLocation2, Path=Name}"
+                        Header="正极花瓣检测" />
+                    <MenuItem
+                        Name="okLocation3"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=okLocation3, Path=Name}"
+                        Header="成品检测" />
+                </MenuItem>
+                <MenuItem Name="ng" Header="NG">
+                    <MenuItem
+                        Name="ngLocation1"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=ngLocation1, Path=Name}"
+                        Header="负极花瓣检测" />
+                    <MenuItem
+                        Name="ngLocation2"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=ngLocation2, Path=Name}"
+                        Header="正极花瓣检测" />
+                    <MenuItem
+                        Name="ngLocation3"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=ngLocation3, Path=Name}"
+                        Header="成品检测" />
+                </MenuItem>
+                <MenuItem Name="all" Header="结果图像">
+                    <MenuItem
+                        Name="allLocation1"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=allLocation1, Path=Name}"
+                        Header="负极花瓣检测" />
+                    <MenuItem
+                        Name="allLocation2"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=allLocation2, Path=Name}"
+                        Header="正极花瓣检测" />
+                    <MenuItem
+                        Name="allLocation3"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=allLocation3, Path=Name}"
+                        Header="成品检测" />
+                </MenuItem>
+                <MenuItem Name="faultImage" Header="Fault">
+                    <MenuItem
+                        Name="FaultLocation1"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=okLocation1, Path=Name}"
+                        Header="负极花瓣检测" />
+                    <MenuItem
+                        Name="FaultLocation2"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=okLocation1, Path=Name}"
+                        Header="正极花瓣检测" />
+                    <MenuItem
+                        Name="FaultLocation3"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=okLocation1, Path=Name}"
+                        Header="成品检测" />
+                </MenuItem>
+                <Separator />
+                <MenuItem
+                    Name="fault"
+                    Command="{Binding Record_Command}"
+                    CommandParameter="{Binding ElementName=fault, Path=Name}"
+                    Header="错误" />
+                <Separator />
+                <MenuItem
+                    Name="log"
+                    Command="{Binding Record_Command}"
+                    CommandParameter="{Binding ElementName=log, Path=Name}"
+                    Header="日志" />
+                <MenuItem Name="data" Header="数据">
+                    <MenuItem
+                        Name="DataLocation1"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=DataLocation1, Path=Name}"
+                        Header="负极花瓣检测" />
+                    <MenuItem
+                        Name="DataLocation2"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=DataLocation2, Path=Name}"
+                        Header="正极花瓣检测" />
+                    <MenuItem
+                        Name="DataLocation3"
+                        Command="{Binding Record_Command}"
+                        CommandParameter="{Binding ElementName=DataLocation3, Path=Name}"
+                        Header="成品检测" />
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Name="tool" Header="工具">
+                <MenuItem
+                    Name="realTimeMode"
+                    Header="实时显示模式"
+                    IsCheckable="True"
+                    IsChecked="{Binding MainViewSection.RealTimeMode, Mode=TwoWay}" />
+                <MenuItem Name="runCleaner" Header="运行清洁器" />
+                <MenuItem
+                    Name="TestData"
+                    Header="数据测试开始"
+                    IsCheckable="True"
+                    IsChecked="{Binding MainViewSection.TestData, Mode=TwoWay}" />
+                <MenuItem
+                    Name="SaveNGData"
+                    Header="存NG结果图片"
+                    IsCheckable="True"
+                    IsChecked="{Binding MainViewSection.SaveNGData, Mode=TwoWay}" />
+                <MenuItem
+                    Name="SaveOKData"
+                    Header="存OK结果图片"
+                    IsCheckable="True"
+                    IsChecked="{Binding MainViewSection.SaveOKData, Mode=TwoWay}" />
+                <MenuItem
+                    Name="SaveOrData"
+                    Header="存原图片"
+                    IsCheckable="True"
+                    IsChecked="{Binding MainViewSection.SaveOrData, Mode=TwoWay}" />
+                <MenuItem
+                    Name="isResultOut"
+                    Header="屏蔽输出"
+                    IsChecked="False">
+                    <MenuItem
+                        Name="negativeResultOut"
+                        Header="负极屏蔽输出"
+                        IsCheckable="False">
+                        <MenuItem
+                            Name="negativeFlower"
+                            Header="屏蔽极花输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.NegativeFlower, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="negativeAngle"
+                            Header="屏蔽角度输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.NegativeAngle, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="negativeL2"
+                            Header="屏蔽L2输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.NegativeL2, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="negativeSplit"
+                            Header="屏蔽箔裂输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.NegativeSplit, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="negativeNeedleHole"
+                            Header="屏蔽铆偏输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.NegativeNeedleHole, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="negativeAll"
+                            Foreground="#FFFF0000"
+                            Header="屏蔽所有输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.NegativeAll, Mode=TwoWay}" 
+                            Command="{Binding MenuItemMask_Command}" CommandParameter="{Binding ElementName=negativeAll, Path=Name}"/>
+                    </MenuItem>
+                    <MenuItem
+                        Name="positiveResultOut"
+                        Header="正极屏蔽输出"
+                        IsChecked="False">
+                        <MenuItem
+                            Name="positiveFlower"
+                            Header="屏蔽极花输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.PositiveFlower, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="positiveAngle"
+                            Header="屏蔽角度输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.PositiveAngle, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="positiveL2"
+                            Header="屏蔽L2输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.PositiveL2, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="positiveSplit"
+                            Header="屏蔽箔裂输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.PositiveSplit, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="positiveMoSplit"
+                            Header="屏蔽底膜箔裂输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.PositiveMoSplit, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="positiveNeedleHole"
+                            Header="屏蔽铆偏输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.PositiveNeedleHole, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="positiveAll"
+                            Foreground="#FFFF0000"
+                            Header="屏蔽所有输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.PositiveAll, Mode=TwoWay}" 
+                            Command="{Binding MenuItemMask_Command}" CommandParameter="{Binding ElementName=positiveAll, Path=Name}"/>
+                    </MenuItem>
+                    <MenuItem
+                        Name="productionResultOut"
+                        Header="成品屏蔽输出"
+                        IsCheckable="False"
+                        IsChecked="False">
+                        <MenuItem
+                            Name="productionHeight"
+                            Header="屏蔽高度输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.ProductionHeight, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="productionDiameter"
+                            Header="屏蔽直径输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.ProductionDiameter, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="pproductionfootDistanceExternal"
+                            Header="屏蔽脚距输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.PproductionfootDistanceExternal, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="productionfootOffset"
+                            Header="屏蔽高低脚输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.ProductionfootOffset, Mode=TwoWay}" />
+                        <MenuItem
+                            Name="productionAll"
+                            Foreground="#FFFF0000"
+                            Header="屏蔽所有输出"
+                            IsCheckable="True"
+                            IsChecked="{Binding MainViewSection.ProductionAll, Mode=TwoWay}" 
+                            Command="{Binding MenuItemMask_Command}" CommandParameter="{Binding ElementName=productionAll, Path=Name}"/>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Name="dataShow" Header="数据显示" />
+                <MenuItem Name="lightAndIo" Header="光源与IO" />
+                <MenuItem
+                    Name="StartAtuo"
+                    Header="开机自启动"
+                    IsCheckable="True"
+                    IsChecked="{Binding MainViewSection.StartAtuo, Mode=TwoWay}" />
+                <MenuItem
+                    Name="ClearTotal"
+                    Header="统计清零"
+                    IsCheckable="False" />
+                <MenuItem
+                    Name="ShowAlarm"
+                    Header="启用错误提示"
+                    IsCheckable="True"
+                    IsChecked="{Binding MainViewSection.ShowAlarm, Mode=TwoWay}" />
+            </MenuItem>
+            <MenuItem Name="User" Header="用户">
+                <MenuItem Name="CheckIn" Header="登入" />
+                <MenuItem Name="CheckOut" Header="注销" />
+            </MenuItem>
+        </Menu>
+        <Label
+            Name="Userstate"
+            Grid.Row="0"
+            Grid.Column="2"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Content="登入状态："
+            FontSize="10" />
+        <Viewbox
+            Grid.Row="1"
+            Grid.RowSpan="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="-2,5,2,-5"
+            Stretch="Fill">
+            <Grid
+                Background="#FFFFFFFF"
+                Column="0"
+                Row="1"
+                RowSpan="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="79*" />
+                    <ColumnDefinition Width="81*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="79*" />
+                    <ColumnDefinition Width="79*" />
+                    <ColumnDefinition Width="79*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                    <ColumnDefinition Width="80*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*" />
+                    <RowDefinition Height="27*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                    <RowDefinition Height="31*" />
+                </Grid.RowDefinitions>
+                <h:HSmartWindowControlWPF
+                    Name="location2HWindow"
+                    Grid.Row="1"
+                    Grid.RowSpan="11"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="9"
+                    BorderThickness="1"
+                    HImagePart="{Binding}">
+                    <h:HIconicDisplayObjectWPF IconicObject="{Binding PImage}" />
+                </h:HSmartWindowControlWPF>
+
+                <h:HSmartWindowControlWPF
+                    Name="location1HWindow"
+                    Grid.Row="1"
+                    Grid.RowSpan="11"
+                    Grid.Column="9"
+                    Grid.ColumnSpan="9"
+                    Height="337"
+                    Margin="5,0,0,0"
+                    VerticalAlignment="Top"
+                    BorderThickness="1">
+                    <h:HIconicDisplayObjectWPF IconicObject="{Binding NImage}" />
+                </h:HSmartWindowControlWPF>
+                <h:HSmartWindowControlWPF
+                    Name="location3HWindow"
+                    Grid.Row="1"
+                    Grid.RowSpan="11"
+                    Grid.Column="18"
+                    Grid.ColumnSpan="9"
+                    Margin="5,0,0,0"
+                    BorderThickness="1">
+                    <h:HIconicDisplayObjectWPF IconicObject="{Binding FImage}" />
+                </h:HSmartWindowControlWPF>
+                <!--<Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4"
+                    Width="300"
+                    Height="60"
+                    Margin="10,10,45,10"
+                    HorizontalAlignment="Left" />-->
+                <Grid
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4"
+                    Width="300"
+                    Height="60"
+                    Margin="10,10,10,10"
+                    HorizontalAlignment="Left">
+                    <Image Source="/CENJE.Data_interface/CENj.png" />
+                </Grid>
+                <Label
+                    Name="labtitle"
+                    Grid.Row="0"
+                    Grid.Column="9"
+                    Grid.ColumnSpan="9"
+                    Width="345"
+                    Height="64"
+                    Margin="6,0,10,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Background="#FF8A2BE2"
+                    Content="钉卷机视觉检测系统"
+                    FontSize="36"
+                    FontStyle="Normal"
+                    Foreground="#FFFFFFFF"
+                    RenderTransformOrigin="0.494,0.463" />
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="18"
+                    Grid.ColumnSpan="11">
+                    <StackPanel Orientation="Horizontal">
+                        <Label
+                            Name="showCurrentProject"
+                            Grid.ColumnSpan="8"
+                            Width="100"
+                            Height="34"
+                            Margin="0,1,35,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Left"
+                            Background="#FFFFFFFF"
+                            Content="当前配方："
+                            FontSize="20"
+                            FontStyle="Normal"
+                            Foreground="#FF008000"
+                            RenderTransformOrigin="0.494,0.463" />
+                        <TextBox
+                            Width="150"
+                            Height="34"
+                            Margin="5,10,0,5"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontSize="20"
+                            Text="" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label
+                            Margin="1"
+                            Content="负极间隔"
+                            FontSize="20"
+                            Foreground="#FF008000" />
+                        <TextBox
+                            Name="nIntervalValue"
+                            Width="60"
+                            Margin="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20" />
+                        <Label
+                            Margin="1"
+                            Content="正极间隔"
+                            FontSize="20"
+                            Foreground="#FF008000" />
+                        <TextBox
+                            Name="pIntervalValue"
+                            Width="60"
+                            Margin="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20" />
+                        <Button
+                            Name="saveJiange"
+                            Width="60"
+                            Margin="3"
+                            HorizontalAlignment="Right"
+                            Content="保存" />
+                    </StackPanel>
+                </StackPanel>
+                <TabControl
+                    Grid.Row="19"
+                    Grid.Column="10"
+                    Grid.ColumnSpan="10"
+                    Margin="0,0.286,5,30.714"
+                    RenderTransformOrigin="0.673,0.495" />
+                <Label
+                    Name="PlcConnSingle"
+                    Grid.Column="26"
+                    Width="33"
+                    Height="31"
+                    Margin="0,1,16,3"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#FFFF0000"
+                    Content="IO">
+                    <FrameworkElement.Resources>
+                        <ResourceDictionary>
+                            <Style x:Key="{x:Type Border}" TargetType="{x:Type Border}">
+                                <Setter Property="Border.CornerRadius" Value="400" />
+                                <Setter Property="BorderBrush" Value="#FFF0FFFF" />
+                            </Style>
+                        </ResourceDictionary>
+                    </FrameworkElement.Resources>
+                </Label>
+                <Label
+                    Name="location2TextBlock"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Width="33"
+                    Height="31"
+                    Margin="16,5,0,12"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#FFFF0000"
+                    Content="正极">
+                    <FrameworkElement.Resources>
+                        <ResourceDictionary>
+                            <Style x:Key="{x:Type Border}" TargetType="{x:Type Border}">
+                                <Setter Property="Border.CornerRadius" Value="400" />
+                                <Setter Property="BorderBrush" Value="#FFF0FFFF" />
+                            </Style>
+                        </ResourceDictionary>
+                    </FrameworkElement.Resources>
+                </Label>
+                <Label
+                    Name="location1TextBlock"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Grid.Column="9"
+                    Width="33"
+                    Height="31"
+                    Margin="20,10,0,17"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#FFFF0000"
+                    Content="负极"
+                    RenderTransformOrigin="0.458,1.358">
+                    <FrameworkElement.Resources>
+                        <ResourceDictionary>
+                            <Style x:Key="{x:Type Border}" TargetType="{x:Type Border}">
+                                <Setter Property="Border.CornerRadius" Value="400" />
+                                <Setter Property="BorderBrush" Value="#FFF0FFFF" />
+                            </Style>
+                        </ResourceDictionary>
+                    </FrameworkElement.Resources>
+                </Label>
+                <Label
+                    Name="location3TextBlock"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Grid.Column="18"
+                    Width="33"
+                    Height="31"
+                    Margin="0,10,0,17"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="#FFFF0000"
+                    Content="外观"
+                    RenderTransformOrigin="0.458,1.358">
+                    <FrameworkElement.Resources>
+                        <ResourceDictionary>
+                            <Style x:Key="{x:Type Border}" TargetType="{x:Type Border}">
+                                <Setter Property="Border.CornerRadius" Value="400" />
+                                <Setter Property="BorderBrush" Value="#FFF0FFFF" />
+                            </Style>
+                        </ResourceDictionary>
+                    </FrameworkElement.Resources>
+                </Label>
+                <TabControl
+                    Grid.Row="12"
+                    Grid.RowSpan="11"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="9"
+                    Margin="3"
+                    Background="#FFF5F5DC">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="40" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Content="极花1"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Content="极花2"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Content="极花3"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Content="极花4"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Content="极花5"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Content="极花6"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Content="极花7"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Content="极花8"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="0"
+                            Content="角度"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="9"
+                            Grid.Column="0"
+                            Content="L2间距"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="10"
+                            Grid.Column="0"
+                            Content="箔裂"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="11"
+                            Grid.Column="0"
+                            Content="铆偏"
+                            FontSize="15" />
+                        <TextBox
+                            Name="Location21jihua"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveFlower1}" />
+                        <TextBox
+                            Name="Location22jihua"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveFlower2}" />
+                        <TextBox
+                            Name="Location23jihua"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveFlower3}" />
+                        <TextBox
+                            Name="Location24jihua"
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveFlower4}" />
+                        <TextBox
+                            Name="Location25jihua"
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveFlower5}" />
+                        <TextBox
+                            Name="Location26jihua"
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveFlower6}" />
+                        <TextBox
+                            Name="Location27jihua"
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="0" />
+                        <TextBox
+                            Name="Location28jihua"
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="0" />
+                        <TextBox
+                            Name="Location2Angle"
+                            Grid.Row="8"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveAngle}" />
+                        <TextBox
+                            Name="Location2L2Dist"
+                            Grid.Row="9"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveL2}" />
+                        <TextBox
+                            Name="Location2Split"
+                            Grid.Row="10"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveFoilCrack}" />
+                        <TextBox
+                            Name="Location2NeedleHoleDistance"
+                            Grid.Row="11"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositivePinOffset}" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="2"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="2"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="2"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="7"
+                            Grid.Column="2"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="2"
+                            Content="°"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="9"
+                            Grid.Column="2"
+                            Content="mm"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="10"
+                            Grid.Column="2"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="11"
+                            Grid.Column="2"
+                            Content="mm"
+                            FontSize="15" />
+                        <TextBox
+                            Name="ngPoFlowerCount"
+                            Grid.Row="7"
+                            Grid.Column="4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveFlowerNGNum}" />
+                        <TextBox
+                            Name="ngPoAngleCount"
+                            Grid.Row="8"
+                            Grid.Column="4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveAngleNGNum}" />
+                        <TextBox
+                            Name="ngPoL2Count"
+                            Grid.Row="9"
+                            Grid.Column="4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveL2NGNum}" />
+                        <TextBox
+                            Name="ngPoSplitCount"
+                            Grid.Row="10"
+                            Grid.Column="4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveFoilCrackNGNum}" />
+                        <TextBox
+                            Name="ngPoNeedleHoleCount"
+                            Grid.Row="11"
+                            Grid.Column="4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositivePinOffsetNGNum}" />
+                    </Grid>
+                </TabControl>
+                <TabControl
+                    Grid.Row="12"
+                    Grid.RowSpan="11"
+                    Grid.Column="9"
+                    Grid.ColumnSpan="9"
+                    Margin="3"
+                    Background="#FFF5F5DC">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="27*" />
+                            <RowDefinition Height="27*" />
+                            <RowDefinition Height="27*" />
+                            <RowDefinition Height="27*" />
+                            <RowDefinition Height="27*" />
+                            <RowDefinition Height="27*" />
+                            <RowDefinition Height="27*" />
+                            <RowDefinition Height="27*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="27.11" />
+                            <RowDefinition Height="27*" />
+                            <RowDefinition Height="27*" />
+                            <RowDefinition Height="5*" />
+                            <RowDefinition Height="5*" />
+                            <RowDefinition Height="5*" />
+                            <RowDefinition Height="5*" />
+                            <RowDefinition Height="5*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10.377" />
+                            <ColumnDefinition Width="89.623" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="40" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Content="极花1"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Content="极花2"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            Content="极花3"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            Content="极花4"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Content="极花5"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Content="极花6"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            Content="极花7"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            Content="极花8"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            Content="角度"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="9"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            Content="L2间距"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="10"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            Content="箔裂"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="11"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            Content="铆偏"
+                            FontSize="15" />
+                        <TextBox
+                            Name="Location11jihua"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeFlower1}" />
+                        <TextBox
+                            Name="Location12jihua"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeFlower2}" />
+                        <TextBox
+                            Name="Location13jihua"
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveFlower3}" />
+                        <TextBox
+                            Name="Location14jihua"
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeFlower4}" />
+                        <TextBox
+                            Name="Location15jihua"
+                            Grid.Row="4"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeFlower5}" />
+                        <TextBox
+                            Name="Location16jihua"
+                            Grid.Row="5"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeFlower6}" />
+                        <TextBox
+                            Name="Location17jihua"
+                            Grid.Row="6"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="0" />
+                        <TextBox
+                            Name="Location18jihua"
+                            Grid.Row="7"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="0" />
+                        <TextBox
+                            Name="Location1Angle"
+                            Grid.Row="8"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeAngle}" />
+                        <TextBox
+                            Name="Location1L2Dist"
+                            Grid.Row="9"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeL2}" />
+                        <TextBox
+                            Name="Location1Split"
+                            Grid.Row="10"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeFoilCrack}" />
+                        <TextBox
+                            Name="Location1NeedleHoleDistance"
+                            Grid.Row="11"
+                            Grid.Column="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativePinOffset}" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="3"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="3"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="3"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="3"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="3"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="3"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="7"
+                            Grid.Column="3"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="3"
+                            Content="°"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="9"
+                            Grid.Column="3"
+                            Content="mm"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="10"
+                            Grid.Column="3"
+                            Content="Pix"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="11"
+                            Grid.Column="3"
+                            Content="mm"
+                            FontSize="15" />
+                        <TextBox
+                            Name="ngNeFlowerCount"
+                            Grid.Row="7"
+                            Grid.Column="4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeFlowerNGNum}" />
+                        <TextBox
+                            Name="ngNeAngleCount"
+                            Grid.Row="8"
+                            Grid.Column="4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeAngleNGNum}" />
+                        <TextBox
+                            Name="ngNeL2Count"
+                            Grid.Row="9"
+                            Grid.Column="4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeL2NGNum}" />
+                        <TextBox
+                            Name="ngNeSplitCount"
+                            Grid.Row="10"
+                            Grid.Column="4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeFoilCrackNGNum}" />
+                        <TextBox
+                            Name="ngNeNeedleHoleCount"
+                            Grid.Row="11"
+                            Grid.Column="4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativePinOffsetNGNum}" />
+                    </Grid>
+                </TabControl>
+                <TabControl
+                    Grid.Row="12"
+                    Grid.RowSpan="11"
+                    Grid.Column="18"
+                    Grid.ColumnSpan="9"
+                    Margin="10,10,0,5"
+                    Background="#FFF5F5DC">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2.5*" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Content="芯包高度"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Content="芯包直径"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Content="脚距"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Content="高低脚"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Content="上CP线"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Content="下CP线"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Center"
+                            Content="正极"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Center"
+                            Content="负极"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="5"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Center"
+                            Content="成品"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Content="检测总数"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Content="良率"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="9"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Content="不良品数"
+                            FontSize="15" />
+                        <TextBox
+                            Name="Location3xinbaogao"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.ProductHeight}" />
+                        <TextBox
+                            Name="Location3xinbaowaijing"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.ProductDiameter}" />
+                        <TextBox
+                            Name="Location3jiaojianju"
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.ProductPinPitch}" />
+                        <TextBox
+                            Name="Location3gaodijiao"
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.ProductDifferenceOfHeight}" />
+                        <TextBox
+                            Name="Location3upCpLine"
+                            Grid.Row="4"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.ProductTopCPline}" />
+                        <TextBox
+                            Name="Location3downCpLine"
+                            Grid.Row="5"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="3"
+                            Margin="0,0,0,5"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.ProductBottomCPLine}" />
+                        <TextBox
+                            Name="Location2TotalCountbox"
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="15"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveDetectionCount}" />
+                        <TextBox
+                            Name="Location2Yieldbox"
+                            Grid.Row="8"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="15"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveYield}" />
+                        <TextBox
+                            Name="Location2NgCountbox"
+                            Grid.Row="9"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="15"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.PositiveNGCount}" />
+                        <TextBox
+                            Name="Location1TotalCountbox"
+                            Grid.Row="7"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="15"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeDetectionCount}" />
+                        <TextBox
+                            Name="Location1Yieldbox"
+                            Grid.Row="8"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="15"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeYield}" />
+                        <TextBox
+                            Name="Location1NgCountbox"
+                            Grid.Row="9"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="15"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.NegativeNGCount}" />
+                        <TextBox
+                            Name="Location3TotalCountbox"
+                            Grid.Row="7"
+                            Grid.Column="5"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="15"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.ProductDetectionCount}" />
+                        <TextBox
+                            Name="Location3Yieldbox"
+                            Grid.Row="8"
+                            Grid.Column="5"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="15"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.ProductYield}" />
+                        <TextBox
+                            Name="Location3NgCountbox"
+                            Grid.Row="9"
+                            Grid.Column="5"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="15"
+                            Foreground="#FF000000"
+                            Text="{Binding DetectionResultModel.ProductNGCount}" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="6"
+                            Content="mm"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="6"
+                            Content="mm"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="6"
+                            Content="mm"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="6"
+                            Content="mm"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="6"
+                            Content="mm"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="6"
+                            Content="mm"
+                            FontSize="15" />
+                        <Label
+                            Grid.Row="7"
+                            Grid.Column="7"
+                            Content="pcs" />
+                        <Label
+                            Grid.Row="8"
+                            Grid.Column="7"
+                            Content="%" />
+                        <Label
+                            Grid.Row="9"
+                            Grid.Column="7"
+                            Content="pcs" />
+                        <TextBox
+                            Name="ngProHightCount"
+                            Grid.Row="0"
+                            Grid.Column="7"
+                            Grid.ColumnSpan="2"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="0" />
+                        <TextBox
+                            Name="ngProWidthCount"
+                            Grid.Row="1"
+                            Grid.Column="7"
+                            Grid.ColumnSpan="2"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="0" />
+                        <TextBox
+                            Name="ngProFootDistanceCount"
+                            Grid.Row="2"
+                            Grid.Column="7"
+                            Grid.ColumnSpan="2"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="0" />
+                        <TextBox
+                            Name="ngProFootOffsetCount"
+                            Grid.Row="3"
+                            Grid.Column="7"
+                            Grid.ColumnSpan="2"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000"
+                            Text="0" />
+                        <TextBox
+                            Name="stateOkNg"
+                            Grid.Row="6"
+                            Grid.Column="7"
+                            Margin="1"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="#FFF5F5F5"
+                            FontSize="17"
+                            Foreground="#FF000000" />
+                        <Button
+                            Name="ClearCountbtn"
+                            Grid.Row="10"
+                            Grid.RowSpan="2"
+                            Grid.Column="5"
+                            Grid.ColumnSpan="3"
+                            Margin="3"
+                            Background="#FF00CED1"
+                            Content="清零"
+                            FontSize="35">
+                            <FrameworkElement.Resources>
+                                <ResourceDictionary>
+                                    <Style x:Key="{x:Type Border}" TargetType="{x:Type Border}">
+                                        <Setter Property="Border.CornerRadius" Value="10" />
+                                        <Setter Property="BorderBrush" Value="#FFF0FFFF" />
+                                    </Style>
+                                </ResourceDictionary>
+                            </FrameworkElement.Resources>
+                        </Button>
+                        <Button
+                            Name="StartRunning"
+                            Grid.Row="10"
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="3"
+                            Background="#FF2E8B57"
+                            Command="{Binding Start_Command}"
+                            Content="启动"
+                            FontSize="35">
+                            <FrameworkElement.Resources>
+                                <ResourceDictionary>
+                                    <Style x:Key="{x:Type Border}" TargetType="{x:Type Border}">
+                                        <Setter Property="Border.CornerRadius" Value="10" />
+                                        <Setter Property="BorderBrush" Value="#FFF0FFFF" />
+                                    </Style>
+                                </ResourceDictionary>
+                            </FrameworkElement.Resources>
+                        </Button>
+                        <Button
+                            Name="StopRunning"
+                            Grid.Row="10"
+                            Grid.RowSpan="2"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="3"
+                            Margin="3"
+                            Background="#FF808080"
+                            Command="{Binding Stop_Command}"
+                            Content="停止"
+                            FontSize="35">
+                            <FrameworkElement.Resources>
+                                <ResourceDictionary>
+                                    <Style x:Key="{x:Type Border}" TargetType="{x:Type Border}">
+                                        <Setter Property="Border.CornerRadius" Value="10" />
+                                        <Setter Property="BorderBrush" Value="#FFF0FFFF" />
+                                    </Style>
+                                </ResourceDictionary>
+                            </FrameworkElement.Resources>
+                        </Button>
+                    </Grid>
+                </TabControl>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</Window>

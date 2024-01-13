@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<System_Root>
+  <FormulaType>
+  </FormulaType>
+  <FlowerCount>0</FlowerCount>
+  <Warming>0</Warming>
+  <AreaMaxN>0</AreaMaxN>
+  <AreaMinN>0</AreaMinN>
+  <FoilCrackMaxN>0</FoilCrackMaxN>
+  <FoilCrackMinN>0</FoilCrackMinN>
+  <AngleMaxN>0</AngleMaxN>
+  <AngleMinN>0</AngleMinN>
+  <L2MaxN>0</L2MaxN>
+  <L2MinN>0</L2MinN>
+  <RivetOffsrtMaxN>0</RivetOffsrtMaxN>
+  <RivetOffsrtMinN>0</RivetOffsrtMinN>
+  <ColorN>1</ColorN>
+  <AreaMaxP>0</AreaMaxP>
+  <AreaMinP>0</AreaMinP>
+  <FoilCrackMaxP>0</FoilCrackMaxP>
+  <FoilCrackMinP>0</FoilCrackMinP>
+  <AngleMaxP>0</AngleMaxP>
+  <AngleMinP>0</AngleMinP>
+  <L2MaxP>0</L2MaxP>
+  <L2MinP>0</L2MinP>
+  <RivetOffsrtMaxP>0</RivetOffsrtMaxP>
+  <RivetOffsrtMinP>0</RivetOffsrtMinP>
+  <HeightMax>0</HeightMax>
+  <HeightMin>0</HeightMin>
+  <ODMax>0</ODMax>
+  <ODMin>0</ODMin>
+  <PinPitchMax>0</PinPitchMax>
+  <PinPitchMin>0</PinPitchMin>
+  <DifferenceOfHeightMax>0</DifferenceOfHeightMax>
+  <DifferenceOfHeightMin>0</DifferenceOfHeightMin>
+  <CPlineUpMax>0</CPlineUpMax>
+  <CPlineUpMin>0</CPlineUpMin>
+  <CPlineBottomMax>0</CPlineBottomMax>
+  <CPlineBottomMin>0</CPlineBottomMin>
+</System_Root>

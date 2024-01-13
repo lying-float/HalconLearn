@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33801.447
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CENJE-Vison", "CENJE-Vison\CENJE-Vison.csproj", "{35CF21A2-E525-4C24-A558-627DC43541DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35CF21A2-E525-4C24-A558-627DC43541DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35CF21A2-E525-4C24-A558-627DC43541DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35CF21A2-E525-4C24-A558-627DC43541DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35CF21A2-E525-4C24-A558-627DC43541DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C3AE25B7-C53C-42EA-853E-49E6EE71BF5E}
+	EndGlobalSection
+EndGlobal
